@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your Electron Browser</title>
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #browserView {
+        width: 100vw;
+        height: 100vh;
+        /* display: block; */
+      }
+    </style>
+  </head>
+  <body>
+
+    <webview id="browserView" src="https://www.jaccon.com.br" preload="./preload.js"></webview>
+
+    <script>
+      const { ipcRenderer } = require('electron');
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        ipcRenderer.send('webview-loaded');
+      });
+    </script>
+  </body>
+</html>

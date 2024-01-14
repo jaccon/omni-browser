@@ -1,0 +1,11 @@
+{
+  "preloadURL": "https://www.jaccon.com.br",
+  "aboutPageURL": "https://www.google.com",
+  "enableSavePage": true,
+  "enableQuitBrowser": true,
+  "enableMaximizeButton": true,
+  "enableMinimizeButton": true,
+  "enableAutoRefreshInactive": true,
+  "reloadButtonLabel": "Evento Internet Agora 2024",
+  "enableSettings": true
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Config Editor</title>
+</head>
+<body>
+  <pre id="config-display"></pre>
+  <textarea id="config-editor" rows="20" cols="60"></textarea>
+  <button id="save-button">Save</button>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    let config;
+
+    ipcRenderer.on('set-config', (event, newConfig) => {
+      config = newConfig;
+      displayConfig();
+    });
+
+    function displayConfig() {
+      const configDisplay = document.getElementById('config-display');
+      const configEditor = document.getElementById('config-editor');
+
+      configDisplay.textContent = JSON.stringify(config, null, 2);
+      configEditor.value = JSON.stringify(config, null, 2);
+    }
+
+    function saveConfig() {
+      const newConfig = JSON.parse(document.getElementById('config-editor').value);
+      ipcRenderer.send('save-config', newConfig);
+    }
+
+    document.getElementById('save-button').addEventListener('click', saveConfig);
+
+    displayConfig();
+  </script>
+</body>
+</html>
